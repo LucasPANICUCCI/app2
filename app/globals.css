@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible Next Variable", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --font-mono: "Atkinson Hyperlegible Mono Variable", "Atkinson Hyperlegible Mono", ui-monospace, monospace;
+
+  /* Palette : fond clair et froid, bleu profond pour l'encre et les actions, vert pour les acquis. */
+  --color-paper: #f2f5f8;
+  --color-surface: #ffffff;
+  --color-sunken: #e9eef4;
+  --color-line: #d5dde7;
+  --color-line-strong: #b4c0cf;
+  --color-ink: #13233f;
+  --color-ink-soft: #46556c;
+  --color-deep: #173a6b;
+  --color-deep-strong: #0e2a52;
+  --color-deep-tint: #e5ecf6;
+  --color-sky: #5b86c2;
+  --color-green: #1b7350;
+  --color-green-strong: #135a3e;
+  --color-green-tint: #e0f0e7;
+  --color-amber: #8a5200;
+  --color-amber-tint: #fbf0dc;
+  --color-red: #a12e26;
+  --color-red-tint: #fbe8e5;
+  --color-focus: #2563c9;
+  --color-console: #102039;
+  --color-console-ink: #dce6f3;
+  --color-console-dim: #93a7c4;
+
+  --radius-card: 18px;
+  --radius-control: 10px;
+
+  --text-display: 2.5rem;
+  --text-display--line-height: 1.12;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: #c9d9f1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-control);
+    font-weight: 600;
+    line-height: 1.2;
+    border: 1.5px solid transparent;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .btn-primary {
+    background: var(--color-deep);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-deep-strong);
+  }
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-deep);
+    border-color: var(--color-line-strong);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    border-color: var(--color-deep);
+    background: var(--color-deep-tint);
+  }
+  .btn-quiet {
+    background: transparent;
+    color: var(--color-deep);
+    padding-inline: 0.6rem;
+  }
+  .btn-quiet:hover:not(:disabled) {
+    background: var(--color-deep-tint);
+  }
+  .btn-success {
+    background: var(--color-green);
+    color: #fff;
+  }
+  .btn-success:hover:not(:disabled) {
+    background: var(--color-green-strong);
+  }
+  .btn-danger {
+    background: var(--color-red);
+    color: #fff;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .field {
+    width: 100%;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-line-strong);
+    border-radius: var(--radius-control);
+    padding: 0.6rem 0.8rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+  .field:focus {
+    border-color: var(--color-deep);
+    outline: 3px solid color-mix(in srgb, var(--color-focus) 35%, transparent);
+    outline-offset: 0;
+  }
+  .field::placeholder {
+    color: #7d8a9d;
+  }
+
+  .mono-block {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    background: var(--color-sunken);
+    border-radius: var(--radius-control);
+    padding: 0.75rem 0.9rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .prose-vigie p + p {
+    margin-top: 0.85rem;
+  }
+  .prose-vigie code,
+  code.inline {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--color-sunken);
+    padding: 0.08em 0.35em;
+    border-radius: 5px;
+    overflow-wrap: anywhere;
+  }
+
+  .term-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--color-sky);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    cursor: help;
+  }
+  .term-link:hover {
+    text-decoration-style: solid;
+    color: var(--color-deep);
+  }
+
+  .choice-tile {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choice-tile:hover {
+    border-color: var(--color-line-strong);
+  }
+  .choice-tile:has(input:checked) {
+    border-color: var(--color-deep);
+    background: var(--color-deep-tint);
+  }
+  .choice-tile:has(input:focus-visible) {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  .choice-tile input {
+    margin-top: 0.3rem;
+    accent-color: var(--color-deep);
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+  }
+}
+
+dialog::backdrop {
+  background: rgb(15 30 55 / 0.35);
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.sheet[open] {
+  animation: sheet-in 0.2s ease-out;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal-in 0.25s ease-out;
+}
